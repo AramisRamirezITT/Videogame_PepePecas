@@ -12,7 +12,8 @@ public class Dnachona : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            changeScene.NextScene();
+            changeScene.ChangeSceneTo("Next_Level");
+            // changeScene.ChangeSceneTo("Second_level");
         }
         
     }

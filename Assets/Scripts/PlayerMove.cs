@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour {
 /* ************************************************************ */
 public Rigidbody2D playerRb;
+public static PlayerMove Instance;
+
 public float speed = 3.5f;
 [SerializeField]  private float  jumpSpeed = 250f;
 public bool isGrounded = true;
@@ -17,10 +19,28 @@ public Animator PlayerAnim;
     
     void Start()
     {
+        if (!Instance)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        Instance = this;
+        GameObject.DontDestroyOnLoad(this.gameObject);
+        
+       
     }
     
 void Update(){
     playerRb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, playerRb.velocity.y);
+    
+    // if (playerRb.transform.position.y < -50f)
+    // {
+    //     Debug.Log("Triggered by Enemy");
+    //     // SubstractHealth();
+    //     // transform.position = new Vector3(x,y,z);
+    // }
+    
     
     if (Input.GetAxis("Horizontal") == 0) // Si no se mueve then
     {

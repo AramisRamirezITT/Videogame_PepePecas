@@ -8,6 +8,7 @@ TagManager:
   - Character
   - Ground
   - Enemy
+  - WorldEdge
   layers:
   - Default
   - TransparentFX

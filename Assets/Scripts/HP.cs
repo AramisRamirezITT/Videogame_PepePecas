@@ -5,12 +5,53 @@ using UnityEngine.UI;
 
 public class HP : MonoBehaviour
 {
-    int hp = 3;
+    // ***************************
+    public static HP _GameStatus;
+    public int hp = 3;
+    public int i;
     public Image[] hearts;
     bool hasCooldown = false;
-
     public SceneChanger changeScene;
+    public Rigidbody2D pepe;
+    
+    // public float minHeightForDeath ;
+    private float x = 5.7f;
+    private float y = 2.2f;
+    // private float z = 10.625f;
+    // ****************************
+    void Awake()
+    {
+        if (!_GameStatus)
+        {
+            _GameStatus = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if(_GameStatus != this)
+        {
+            Destroy(gameObject); 
+        }
+        
+    }
+    
+    void start()
+    {
+        
+    }
 
+    void Update()
+    {
+        if (pepe.transform.position.y <= -30f )
+        {
+            // Debug.Log("muertoooooo");
+            SubstractHealth();
+            transform.position = new Vector2(x,y);
+        }
+
+        i = hp;
+        Debug.Log(i);
+    }
+    
+    // ****************************
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
@@ -22,7 +63,7 @@ public class HP : MonoBehaviour
         }
     }
 
-    void SubstractHealth()
+    public void SubstractHealth()
     {
         if (!hasCooldown)
         {
@@ -30,7 +71,6 @@ public class HP : MonoBehaviour
             {
                 hp--;
                 hasCooldown = true;
-
                 StartCoroutine(Cooldown());
             }
 
@@ -43,7 +83,7 @@ public class HP : MonoBehaviour
         }
     }
 
-    void EmptyHearts()
+    public void EmptyHearts()
     {
         for(int i = 0; i < hearts.Length; i++)
         {
@@ -59,5 +99,7 @@ public class HP : MonoBehaviour
 
         StopCoroutine(Cooldown());
     }
+    
+   
     
 }

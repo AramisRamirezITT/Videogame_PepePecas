@@ -49,7 +49,7 @@ public class EnemyConfig : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            if (transform.position.y + 1f < collision.transform.position.y) // checar la diferencia entre el enemigo y el player 
+            if (transform.position.y + 0.8f <= collision.transform.position.y) // checar la diferencia entre el enemigo y el player 
             {
                 EnemyAnimation.SetBool("IsDead", true);
                 enemydiesParticleSystem.transform.position = transform.position; // las particulas se colocan en donde estan los elotes
