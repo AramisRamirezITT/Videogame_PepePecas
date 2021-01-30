@@ -5,10 +5,9 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour {
 /* ************************************************************ */
 public Rigidbody2D playerRb;
-public static PlayerMove Instance;
-
+// public static PlayerMove Instance;
 public float speed = 3.5f;
-[SerializeField]  private float  jumpSpeed = 250f;
+public float  jumpSpeed = 250f;
 public bool isGrounded = true;
 private bool flew = false;
 public Animator PlayerAnim;
@@ -19,14 +18,14 @@ public Animator PlayerAnim;
     
     void Start()
     {
-        if (!Instance)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-
-        Instance = this;
-        GameObject.DontDestroyOnLoad(this.gameObject);
+        // if (!Instance)
+        // {
+        //     Destroy(this.gameObject);
+        //     return;
+        // }
+        //
+        // Instance = this;
+        // GameObject.DontDestroyOnLoad(this.gameObject);
         
        
     }
