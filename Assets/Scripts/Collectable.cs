@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class Collectable : MonoBehaviour
@@ -9,6 +10,7 @@ public class Collectable : MonoBehaviour
     public ParticleSystem collectaParticleSystem;
     public AudioSource collectableAudio;
     public Text CollectableText;
+    private Notification notification;
     
     void Start()
     {
@@ -16,11 +18,32 @@ public class Collectable : MonoBehaviour
         collectaParticleSystem = GameObject.Find("ParticlesCollectable").GetComponent<ParticleSystem>();
         collectableAudio = GetComponentInParent<AudioSource>();
         CollectableText = GameObject.Find("CollectableContador (number)").GetComponent<Text>();
+        
+        NotificationCenter.DefaultCenter().AddObserver(this,"IncrementCollectable");
+
+        
+        
+    }
+    public void IncrementCollectable (Notification notification)
+    {
+
+        if (cornCollectable > GameStatus._GameStatus.collectablesRaw)
+        {
+            Debug.Log("Puntuacion Actual: " + cornCollectable);
+            GameStatus._GameStatus.Save();
+        }
+        else
+        {
+            Debug.Log(GameStatus._GameStatus.collectablesRaw + " Dentro del else");
+        }
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        IncrementCollectable( notification );
         
     }
 
@@ -34,7 +57,10 @@ public class Collectable : MonoBehaviour
             gameObject.SetActive(false);
             cornCollectable++;
             CollectableText.text = cornCollectable.ToString();
+            
         }
         
     }
+
+    
 }

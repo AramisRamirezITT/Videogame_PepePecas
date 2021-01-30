@@ -48,7 +48,7 @@ public class HP : MonoBehaviour
         }
 
         i = hp;
-        Debug.Log(i);
+        // Debug.Log(i);
     }
     
     // ****************************
