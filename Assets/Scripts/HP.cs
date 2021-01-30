@@ -6,49 +6,54 @@ using UnityEngine.UI;
 public class HP : MonoBehaviour
 {
     // ***************************
-    public static HP _GameStatus;
+    // public static HP _Hp;
     public int hp = 3;
-    public int i;
+    private int i;
     public Image[] hearts;
     bool hasCooldown = false;
     public SceneChanger changeScene;
     public Rigidbody2D pepe;
+    private Notification notification;
     
     // public float minHeightForDeath ;
     private float x = 5.7f;
     private float y = 2.2f;
     // private float z = 10.625f;
     // ****************************
-    void Awake()
+    public void VerVidas (Notification notification)
     {
-        if (!_GameStatus)
+       
+        if (Collectable.cornCollectable > 0)
         {
-            _GameStatus = this;
-            DontDestroyOnLoad(gameObject);
+            Debug.Log("Puntuacion Actual: " + Collectable.cornCollectable + "Puntuacion Anterior" +  GameStatus._GameStatus.collectablesRaw);
+            Debug.Log("Vida actual: " + hp + "Vida anterior: " + GameStatus._GameStatus.tacos);
+            GameStatus._GameStatus.collectablesRaw = Collectable.cornCollectable;
+            GameStatus._GameStatus.tacos = hp;
+            GameStatus._GameStatus.Save();
         }
-        else if(_GameStatus != this)
-        {
-            Destroy(gameObject); 
-        }
-        
     }
+    
+    
     
     void start()
     {
-        
+       
+        NotificationCenter.DefaultCenter().AddObserver(this,"IncrementCollectable");
+        NotificationCenter.DefaultCenter().AddObserver(this,"VerVidas");
+
     }
 
     void Update()
     {
+        VerVidas( notification );
+        
         if (pepe.transform.position.y <= -30f )
         {
-            // Debug.Log("muertoooooo");
             SubstractHealth();
             transform.position = new Vector2(x,y);
         }
-
-        i = hp;
-        // Debug.Log(i);
+        
+        
     }
     
     // ****************************
@@ -70,6 +75,7 @@ public class HP : MonoBehaviour
             if(hp > 0)
             {
                 hp--;
+                NotificationCenter.DefaultCenter().PostNotification(this,"VerVidas");
                 hasCooldown = true;
                 StartCoroutine(Cooldown());
             }
@@ -78,7 +84,6 @@ public class HP : MonoBehaviour
             {
                 changeScene.ChangeSceneTo("LoseScene");
             }
-
             EmptyHearts();
         }
     }

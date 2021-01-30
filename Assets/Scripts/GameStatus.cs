@@ -5,19 +5,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using UnityEngine.SceneManagement;
+
 
 
 public class GameStatus : MonoBehaviour
 {
     public static GameStatus _GameStatus;
     private string pathData;
-    
-    
     public int tacos;
     public int level;
     public int collectablesRaw;
     public string collectables;
-    
+    public Image[] hearts;
+    public Text TacosLive;
    
     
     void Awake()
@@ -39,17 +40,23 @@ public class GameStatus : MonoBehaviour
     
     void Start()
     {
-        
-
         Load();
+        
 
     }
     
     void Update()
     {
-        
-        // HP vida = GetComponent<HP>();
-        // tacos = vida.i;
+        if (SceneManager.GetActiveScene().name == "Next_Level")
+        {
+            TacosLive = GameObject.Find("tacosNumber").GetComponent<Text>();
+            Debug.Log("si estoy en la Scene");
+            TacosLive.text = tacos.ToString();
+        }
+        else
+        {
+            Debug.Log("No estyo en la Scene ");
+        }
     }
     
     public void Save()
@@ -68,7 +75,6 @@ public class GameStatus : MonoBehaviour
     void Load()
     {
         
-        
         if (File.Exists(pathData))
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -77,12 +83,13 @@ public class GameStatus : MonoBehaviour
             SaveData data = (SaveData) bf.Deserialize(file);
 
             collectablesRaw = data.collectablesRaw;
-
+            tacos = data.tacos;
             file.Close();
         }
         else
         {
             collectablesRaw = 0;
+            tacos = 3;
         }
 
     }
@@ -91,8 +98,17 @@ public class GameStatus : MonoBehaviour
     class SaveData
     {
         public int collectablesRaw;
-        
-        
+        public int tacos;
+
+
+    }
+    public void EmptyHearts(int tacos,Image[] hearts )
+    {
+        for(int i = 0; i < hearts.Length; i++)
+        {
+            if (tacos - 1 < i)
+                hearts[i].gameObject.SetActive(false);
+        }
     }
     
 }

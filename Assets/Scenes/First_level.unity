@@ -7949,12 +7949,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 3
-  i: 0
   hearts:
   - {fileID: 1906675112}
   - {fileID: 588456293}
   - {fileID: 476845721}
-  changeScene: {fileID: 0}
+  changeScene: {fileID: 1630689731}
   pepe: {fileID: 779993755}
 --- !u!114 &779993758
 MonoBehaviour:
@@ -9425,6 +9424,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fad3eb0c8aa3ab41928766c7faaf629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tacos: 0
+  level: 0
+  collectablesRaw: 0
+  collectables: 
 --- !u!4 &973449728
 Transform:
   m_ObjectHideFlags: 0
