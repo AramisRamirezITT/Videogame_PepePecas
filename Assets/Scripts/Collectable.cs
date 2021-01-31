@@ -22,10 +22,12 @@ public class Collectable : MonoBehaviour
         else
         {
             cornCollectable = GameStatus._GameStatus.collectablesRaw;
+            // changeNumberOfCollectables();
         }
-        collectaParticleSystem = GameObject.Find("ParticlesCollectable").GetComponent<ParticleSystem>();
         collectableAudio = GetComponentInParent<AudioSource>();
         CollectableText = GameObject.Find("CollectableContador (number)").GetComponent<Text>();
+        collectaParticleSystem = GameObject.Find("ParticlesCollectable").GetComponent<ParticleSystem>();
+
         
         NotificationCenter.DefaultCenter().AddObserver(this,"IncrementCollectable");
         NotificationCenter.DefaultCenter().AddObserver(this,"Dead");
@@ -49,8 +51,8 @@ public class Collectable : MonoBehaviour
             gameObject.SetActive(false);
             cornCollectable++;
             NotificationCenter.DefaultCenter().PostNotification(this,"IncrementCollectable");
-            CollectableText.text = cornCollectable.ToString();
-            
+            changeNumberOfCollectables();
+
         }
         
     }
@@ -61,9 +63,9 @@ public class Collectable : MonoBehaviour
         Debug.Log("Elotes Guardados: " + GameStatus._GameStatus.collectablesRaw);
     }
 
-    void changeNumberOfCollectables()
+    private void changeNumberOfCollectables()
     {
-        
+        CollectableText.text = cornCollectable.ToString();
     }
 
     
