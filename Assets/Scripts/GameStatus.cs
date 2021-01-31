@@ -6,19 +6,20 @@ using UnityEngine.UI;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine.SceneManagement;
-
+using Object = UnityEngine.Object;
 
 
 public class GameStatus : MonoBehaviour
 {
     public static GameStatus _GameStatus;
+    
     private string pathData;
     public int tacos;
     public int level;
     public int collectablesRaw;
-    public string collectables;
-    public Image[] hearts;
+    public int collectables;
     public Text TacosLive;
+    public Text score;
    
     
     void Awake()
@@ -42,20 +43,25 @@ public class GameStatus : MonoBehaviour
     {
         Load();
         
-
+        
     }
     
     void Update()
     {
         if (SceneManager.GetActiveScene().name == "Next_Level")
         {
-            TacosLive = GameObject.Find("tacosNumber").GetComponent<Text>();
-            Debug.Log("si estoy en la Scene");
+            TacosLive = GameObject.Find("HearthContador(number)").GetComponent<Text>();
             TacosLive.text = tacos.ToString();
+        }
+        else if (SceneManager.GetActiveScene().name == "LoseScene")
+        {
+            score = GameObject.Find("CollectableNumber").GetComponent<Text>();
+            score.text = collectablesRaw.ToString();
+            Debug.Log("Estyo en lose");
         }
         else
         {
-            Debug.Log("No estyo en la Scene ");
+            // Debug.Log(" el name es" + SceneManager.GetActiveScene().name );
         }
     }
     
@@ -84,6 +90,8 @@ public class GameStatus : MonoBehaviour
 
             collectablesRaw = data.collectablesRaw;
             tacos = data.tacos;
+            
+            
             file.Close();
         }
         else
@@ -102,14 +110,5 @@ public class GameStatus : MonoBehaviour
 
 
     }
-    public void EmptyHearts(int tacos,Image[] hearts )
-    {
-        for(int i = 0; i < hearts.Length; i++)
-        {
-            if (tacos - 1 < i)
-                hearts[i].gameObject.SetActive(false);
-        }
-    }
-    
-}
 
+}
