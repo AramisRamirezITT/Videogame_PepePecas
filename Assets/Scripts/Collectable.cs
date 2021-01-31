@@ -61,6 +61,15 @@ public class Collectable : MonoBehaviour
         GameStatus._GameStatus.collectablesRaw = cornCollectable;
         GameStatus._GameStatus.Save();
         Debug.Log("Elotes Guardados: " + GameStatus._GameStatus.collectablesRaw);
+        
+        if (GameStatus._GameStatus.collectablesRecord <= cornCollectable)
+        {
+            Debug.Log("Se ha superado el record!! " + cornCollectable + " anterior: " + GameStatus._GameStatus.collectablesRecord);
+            
+            GameStatus._GameStatus.collectablesRaw = cornCollectable;          
+            GameStatus._GameStatus.collectablesRecord = cornCollectable;
+            GameStatus._GameStatus.Save();
+        }
     }
 
     private void changeNumberOfCollectables()

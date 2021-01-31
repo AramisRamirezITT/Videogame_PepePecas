@@ -15,11 +15,11 @@ public class GameStatus : MonoBehaviour
     
     private string pathData;
     public int tacos;
-    public int level;
     public int collectablesRaw;
-    public int collectables;
+    public int collectablesRecord ;
     public Text TacosLive;
     public Text score;
+    public Text collectablesRawText;
    
     
     void Awake()
@@ -56,13 +56,17 @@ public class GameStatus : MonoBehaviour
         else if (SceneManager.GetActiveScene().name == "LoseScene")
         {
             score = GameObject.Find("CollectableNumber").GetComponent<Text>();
+            collectablesRawText = GameObject.Find("BestScore").GetComponent<Text>();
+            
             score.text = collectablesRaw.ToString();
-            Debug.Log("Estyo en lose");
+            collectablesRawText.text = collectablesRecord.ToString();
+            // Debug.Log("Estyo en lose");
         }
-        else
-        {
-            // Debug.Log(" el name es" + SceneManager.GetActiveScene().name );
-        }
+        
+        
+        
+        
+        
     }
     
     public void Save()
@@ -90,7 +94,7 @@ public class GameStatus : MonoBehaviour
 
             collectablesRaw = data.collectablesRaw;
             tacos = data.tacos;
-            
+            collectablesRecord = data.collectablesRecord;
             
             file.Close();
         }
@@ -107,6 +111,7 @@ public class GameStatus : MonoBehaviour
     {
         public int collectablesRaw;
         public int tacos;
+        public int collectablesRecord;
 
 
     }
