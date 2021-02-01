@@ -34,7 +34,7 @@ public class HP : MonoBehaviour
 
     void Dead(Notification notification)
     {
-        Debug.Log( "Vida aneterior: " + GameStatus._GameStatus.tacos);
+        // Debug.Log( "Vida aneterior: " + GameStatus._GameStatus.tacos);
         GameStatus._GameStatus.tacos = hp;
         GameStatus._GameStatus.Save();
     }

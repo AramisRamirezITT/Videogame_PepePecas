@@ -53,7 +53,7 @@ public class GameStatus : MonoBehaviour
             TacosLive = GameObject.Find("HearthContador(number)").GetComponent<Text>();
             TacosLive.text = tacos.ToString();
         }
-        else if (SceneManager.GetActiveScene().name == "LoseScene")
+        else if (SceneManager.GetActiveScene().name == "LoseScene" || SceneManager.GetActiveScene().name == "WinScene")
         {
             score = GameObject.Find("CollectableNumber").GetComponent<Text>();
             collectablesRawText = GameObject.Find("BestScore").GetComponent<Text>();
