@@ -22,7 +22,8 @@ public class GameStatus : MonoBehaviour
     public Text collectablesRawText;
     public string nameScene;
 
-    public float [] position;
+    // public float [] position;
+    
    
     
     void Awake()
@@ -98,6 +99,9 @@ public class GameStatus : MonoBehaviour
             collectablesRaw = data.collectablesRaw;
             tacos = data.tacos;
             collectablesRecord = data.collectablesRecord;
+            nameScene = data.nameScene;
+            // position[0] = data.position[0];
+            // position[1] = data.position[1];
             
             file.Close();
         }
@@ -115,6 +119,8 @@ public class GameStatus : MonoBehaviour
         public int collectablesRaw;
         public int tacos;
         public int collectablesRecord;
+        // public float [] position;
+        public string nameScene;
 
 
     }

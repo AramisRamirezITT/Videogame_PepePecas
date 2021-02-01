@@ -10,7 +10,8 @@ public class GameController : MonoBehaviour
     public static GameController _GameController;
     public bool gameRunning;
     public Canvas pauseMen;
-    public Button ButtonResume;
+    public int esc = 0;
+    
     
     
     // Start is called before the first frame update
@@ -27,14 +28,33 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) )
+        {
+            esc++;
+           
+        }
+        if (esc == 0 )
+        {
+            gameRunning = true;
+            
+
+        }
+        
+        if (esc == 1 )
         {
             gameRunning = false;
+            
         }
-
+        if (esc > 1)
+        {
+            esc = 0;
+            
+        }
+        
+        
         if (gameRunning == false)
         {
-            Debug.Log("Game pause");
+            // Debug.Log("Game pause");
             Time.timeScale = 0f;
             pauseMen = GameObject.Find("CanvasPause").GetComponent<Canvas>();
             pauseMen.enabled = true;
@@ -42,7 +62,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Game running");
+            // Debug.Log("Game running");
             Time.timeScale = 1f;
             pauseMen = GameObject.Find("CanvasPause").GetComponent<Canvas>();
             pauseMen.enabled = false;

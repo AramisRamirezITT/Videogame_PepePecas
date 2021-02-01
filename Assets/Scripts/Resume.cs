@@ -21,7 +21,7 @@ public class Resume : MonoBehaviour
     public void ResumeGame()
     {
         Debug.Log("click");
-        gameControl.gameRunning = true;
+        gameControl.esc++;
         Debug.Log("click  " + gameControl.gameRunning);
     }
 }
