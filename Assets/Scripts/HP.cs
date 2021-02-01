@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,8 +36,26 @@ public class HP : MonoBehaviour
     void Dead(Notification notification)
     {
         // Debug.Log( "Vida aneterior: " + GameStatus._GameStatus.tacos);
+        
+      
+        // GameStatus._GameStatus.collectablesRaw = Collectable.cornCollectable;
+        
+        if (Collectable.cornCollectable > GameStatus._GameStatus.collectablesRecord )
+        {
+             GameStatus._GameStatus.collectablesRecord = Collectable.cornCollectable;
+             GameStatus._GameStatus.collectablesRaw = Collectable.cornCollectable ;
+        }
+        else
+        {
+             GameStatus._GameStatus.collectablesRaw = Collectable.cornCollectable ;
+            
+        }
+        Debug.Log("Elotes: " + Collectable.cornCollectable + "Elotes collect" + GameStatus._GameStatus.collectablesRaw + "Elotes record" + GameStatus._GameStatus.collectablesRecord);
         GameStatus._GameStatus.tacos = hp;
         GameStatus._GameStatus.Save();
+        
+        
+        
     }
     void Update()
     {

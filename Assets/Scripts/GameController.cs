@@ -1,21 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [SerializeField]
 
 public class GameController : MonoBehaviour
 {
-    private bool gameRunning ;
+    public static GameController _GameController;
+    public bool gameRunning;
     public Canvas pauseMen;
+    public Button ButtonResume;
     
     
     // Start is called before the first frame update
     void Start()
-    
+
     {
+        gameRunning = true;
         pauseMen = GameObject.Find("CanvasPause").GetComponent<Canvas>();
         pauseMen.enabled = false;
+        // ButtonResume = GameObject.FindGameObjectWithTag("Resume").GetComponent<Button>();
+
     }
 
     // Update is called once per frame
@@ -23,32 +29,30 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ChangeRunnningState();
+            gameRunning = false;
         }
 
-    }
-
-    public void ChangeRunnningState()
-    {
-        gameRunning = !gameRunning;
-        
-        if (gameRunning)
+        if (gameRunning == false)
         {
-            Debug.Log("Game Running");
-            Time.timeScale = 1f;
-            pauseMen = GameObject.Find("CanvasPause").GetComponent<Canvas>();
-            pauseMen.enabled = false;
-           
-        }
-        else
-        {
-            
             Debug.Log("Game pause");
             Time.timeScale = 0f;
             pauseMen = GameObject.Find("CanvasPause").GetComponent<Canvas>();
             pauseMen.enabled = true;
+            
         }
+        else
+        {
+            Debug.Log("Game running");
+            Time.timeScale = 1f;
+            pauseMen = GameObject.Find("CanvasPause").GetComponent<Canvas>();
+            pauseMen.enabled = false;
+            // ChangeRunnningState();
+        }
+       
+
     }
+    
+    
 
     public bool IsGameRunning()
     {

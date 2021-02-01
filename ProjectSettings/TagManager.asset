@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Enemy
   - WorldEdge
+  - Resume
   layers:
   - Default
   - TransparentFX

@@ -20,11 +20,14 @@ public class GameStatus : MonoBehaviour
     public Text TacosLive;
     public Text score;
     public Text collectablesRawText;
+    public string nameScene;
+
+    public float [] position;
    
     
     void Awake()
     {
-        // Debug.Log(Application.persistentDataPath);
+        Debug.Log(Application.persistentDataPath);
         pathData = Application.persistentDataPath + "/data.dat";
         
         if (!_GameStatus)

@@ -7,14 +7,19 @@ using UnityEngine.SceneManagement;
 
 public class Collectable : MonoBehaviour
 {
+    public static Collectable _Collectable;
     public static int cornCollectable = 0;
     public ParticleSystem collectaParticleSystem;
     public AudioSource collectableAudio;
     public Text CollectableText;
-    
+    public int collectableToGS;
+    public int collectableRecordToGS;
     
     void Start()
     {
+        collectableToGS= GameStatus._GameStatus.collectablesRaw;
+        collectableRecordToGS = GameStatus._GameStatus.collectablesRecord;
+        
         if (SceneManager.GetActiveScene().name == "First_level")
         {
             cornCollectable = 0;
@@ -41,7 +46,7 @@ public class Collectable : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D (Collider2D col)
+    public void OnTriggerEnter2D (Collider2D col)
     {
         if (col.tag == "Player")
         {
@@ -56,20 +61,21 @@ public class Collectable : MonoBehaviour
         }
         
     }
-    void IncrementCollectable(Notification notification)
+    public void IncrementCollectable (Notification notification)
     {
-        GameStatus._GameStatus.collectablesRaw = cornCollectable;
-        GameStatus._GameStatus.Save();
-        // Debug.Log("Elotes Guardados: " + GameStatus._GameStatus.collectablesRaw);
-        
-        if (GameStatus._GameStatus.collectablesRecord <= cornCollectable)
-        {
-            // Debug.Log("Se ha superado el record!! " + cornCollectable + " anterior: " + GameStatus._GameStatus.collectablesRecord);
-            
-            GameStatus._GameStatus.collectablesRaw = cornCollectable;          
-            GameStatus._GameStatus.collectablesRecord = cornCollectable;
-            GameStatus._GameStatus.Save();
-        }
+         
+        //  collectableToGS = cornCollectable;
+        // // GameStatus._GameStatus.Save();
+        //
+        //
+        // if (collectableRecordToGS <= cornCollectable)
+        // {
+        //     // Debug.Log("Se ha superado el record!! " + cornCollectable + " anterior: " + GameStatus._GameStatus.collectablesRecord);
+        //     
+        //     GameStatus._GameStatus.collectablesRaw = cornCollectable;          
+        //     collectableRecordToGS = cornCollectable;
+        //     // GameStatus._GameStatus.Save();
+        // }
     }
 
     private void changeNumberOfCollectables()

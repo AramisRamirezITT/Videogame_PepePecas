@@ -319,4 +319,5 @@ Assets\Scripts\GameStatus.cs
 Assets\Scripts\HP.cs
 Assets\Scripts\NotificationCenter.cs
 Assets\Scripts\PlayerMove.cs
+Assets\Scripts\Resume.cs
 Assets\Scripts\SceneChanger.cs
