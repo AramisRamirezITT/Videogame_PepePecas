@@ -2,42 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class SaveFunction : MonoBehaviour
 {
-    public int taquitos;
-    public int  corn;
+    
     public string level;
     public float[] position;
-    
+    public float PositionX;
+    public float PositionY;
     
     void Start()
     {
          
-        // taquitos = GameStatus._GameStatus.tacos;
-        // corn = GameStatus._GameStatus.collectablesRaw;
+       
         level = SceneManager.GetActiveScene().name;
         
-        position = new float[2];
-        position[0] = GameObject.Find("Player").transform.position.x;
-        position[1] = GameObject.Find("Player").transform.position.y;
+        // position = new float[2];
+        PositionX = GameObject.Find("Player").transform.position.x;
+        PositionY = GameObject.Find("Player").transform.position.y;
     }
     
 
     public void SaveData()
     {
-        // GameStatus._GameStatus.tacos = taquitos;
-        // GameStatus._GameStatus.collectablesRaw = corn;
+        
         GameStatus._GameStatus.nameScene = level;
-        // GameStatus._GameStatus.position[0] = position[0];
-        // GameStatus._GameStatus.position[1] = position[1];
+        GameStatus._GameStatus.PositionX = PositionX;
+        GameStatus._GameStatus.PositionY = PositionY;
         GameStatus._GameStatus.Save();
         
         Debug.Log(GameStatus._GameStatus.tacos);
         Debug.Log(GameStatus._GameStatus.collectablesRaw);
         Debug.Log(GameStatus._GameStatus.nameScene);
-        // Debug.Log(GameStatus._GameStatus.position[0]);
-        // Debug.Log(GameStatus._GameStatus.position[1]);
+        Debug.Log(GameStatus._GameStatus.PositionX);
+        Debug.Log(GameStatus._GameStatus.PositionY);
         
     }
 }

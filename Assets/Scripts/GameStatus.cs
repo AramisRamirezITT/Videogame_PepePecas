@@ -21,14 +21,14 @@ public class GameStatus : MonoBehaviour
     public Text score;
     public Text collectablesRawText;
     public string nameScene;
-
-    // public float [] position;
+    public float PositionX;
+    public float PositionY;
     
    
     
     void Awake()
     {
-        Debug.Log(Application.persistentDataPath);
+        // Debug.Log(Application.persistentDataPath);
         pathData = Application.persistentDataPath + "/data.dat";
         
         if (!_GameStatus)
@@ -78,11 +78,10 @@ public class GameStatus : MonoBehaviour
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(pathData);
 
-        SaveData data = new SaveData();
-        data.collectablesRaw = collectablesRaw;
+        SaveData data = new SaveData( collectablesRaw, tacos, collectablesRecord, nameScene, PositionX,PositionY);
         
         bf.Serialize(file, data);
-
+        
         file.Close();
     }
     
@@ -100,8 +99,8 @@ public class GameStatus : MonoBehaviour
             tacos = data.tacos;
             collectablesRecord = data.collectablesRecord;
             nameScene = data.nameScene;
-            // position[0] = data.position[0];
-            // position[1] = data.position[1];
+            PositionX = data.PositionX;
+            PositionY = data.PositionY;
             
             file.Close();
         }
@@ -119,10 +118,29 @@ public class GameStatus : MonoBehaviour
         public int collectablesRaw;
         public int tacos;
         public int collectablesRecord;
-        // public float [] position;
         public string nameScene;
+        public float PositionX;
+        public float PositionY;
+        
+        public SaveData
+        (
+         int collectablesRaw,
+         int tacos,
+         int collectablesRecord,
+         string nameScene,
+         float PositionX,
+         float PositionY
+        )
+        {
+            this.collectablesRaw = collectablesRaw;
+            this.tacos = tacos;
+            this.collectablesRecord = collectablesRecord;
+            this.nameScene = nameScene;
+            this.PositionX = PositionX;
+            this.PositionY = PositionY;
 
-
+        }
+        
     }
 
 }
