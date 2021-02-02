@@ -22,12 +22,21 @@ public class HP : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "First_level")
         {
-            hp = 3;
+            if (LoadGame._LoadGame.loadPartida)
+            {
+                hp = GameStatus._GameStatus.tacos;
+            }
+            else
+            {
+                hp = 3;
+            }
+            
         }
         else
         {
             hp = GameStatus._GameStatus.tacos;
         }
+        
         NotificationCenter.DefaultCenter().AddObserver(this,"Dead");
         NotificationCenter.DefaultCenter().AddObserver(this,"IncrementCollectable");
         EmptyHearts();

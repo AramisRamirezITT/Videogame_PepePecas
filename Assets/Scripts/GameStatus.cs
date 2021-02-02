@@ -14,7 +14,7 @@ public class GameStatus : MonoBehaviour
     public static GameStatus _GameStatus;
     
     private string pathData;
-    public int tacos;
+    public int tacos = 3;
     public int collectablesRaw;
     public int collectablesRecord ;
     public Text TacosLive;

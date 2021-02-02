@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\GameStatus.cs" />
      <Compile Include="Assets\Scripts\HP.cs" />
+     <Compile Include="Assets\Scripts\LoadGame.cs" />
      <Compile Include="Assets\Scripts\NotificationCenter.cs" />
      <Compile Include="Assets\Scripts\PlayerMove.cs" />
      <Compile Include="Assets\Scripts\Resume.cs" />

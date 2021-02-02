@@ -48,7 +48,7 @@ public class GameController : MonoBehaviour
         if (esc > 1)
         {
             esc = 0;
-            
+            gameRunning = true;
         }
         
         
