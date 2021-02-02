@@ -11,23 +11,21 @@ public float  jumpSpeed = 250f;
 public bool isGrounded = true;
 private bool flew = false;
 public Animator PlayerAnim;
-
+public float x;
+public float y;
 
 
 /* ************************************************************ */
     
     void Start()
     {
-        // if (!Instance)
-        // {
-        //     Destroy(this.gameObject);
-        //     return;
-        // }
-        //
-        // Instance = this;
-        // GameObject.DontDestroyOnLoad(this.gameObject);
-        
-       
+        if (GameStatus._GameStatus.LoadGame == 1)
+        {
+            x = GameStatus._GameStatus.PositionX;
+            y = GameStatus._GameStatus.PositionY;
+            transform.position = new Vector2(x, y);
+        }
+
     }
     
 void Update(){

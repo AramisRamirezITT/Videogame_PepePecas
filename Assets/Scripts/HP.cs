@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -15,14 +16,17 @@ public class HP : MonoBehaviour
     public Text tacosText;
     private float x = 5.7f;
     private float y = 2.2f;
+   
 
     private int tacosLoad;
 
     void Start()
     {
+        
+        
         if (SceneManager.GetActiveScene().name == "First_level")
         {
-            if (LoadGame._LoadGame.loadPartida)
+            if (GameStatus._GameStatus.LoadGame == 1)
             {
                 hp = GameStatus._GameStatus.tacos;
             }
@@ -61,6 +65,7 @@ public class HP : MonoBehaviour
         }
         Debug.Log("Elotes: " + Collectable.cornCollectable + "Elotes collect" + GameStatus._GameStatus.collectablesRaw + "Elotes record" + GameStatus._GameStatus.collectablesRecord);
         GameStatus._GameStatus.tacos = hp;
+        GameStatus._GameStatus.LoadGame = 0;
         GameStatus._GameStatus.Save();
         
         

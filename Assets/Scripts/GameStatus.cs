@@ -23,6 +23,7 @@ public class GameStatus : MonoBehaviour
     public string nameScene;
     public float PositionX;
     public float PositionY;
+    public int LoadGame;
     
    
     
@@ -78,7 +79,7 @@ public class GameStatus : MonoBehaviour
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(pathData);
 
-        SaveData data = new SaveData( collectablesRaw, tacos, collectablesRecord, nameScene, PositionX,PositionY);
+        SaveData data = new SaveData( collectablesRaw, tacos, collectablesRecord, nameScene, PositionX,PositionY,LoadGame);
         
         bf.Serialize(file, data);
         
@@ -101,6 +102,7 @@ public class GameStatus : MonoBehaviour
             nameScene = data.nameScene;
             PositionX = data.PositionX;
             PositionY = data.PositionY;
+            LoadGame = data.LoadGame;
             
             file.Close();
         }
@@ -121,6 +123,7 @@ public class GameStatus : MonoBehaviour
         public string nameScene;
         public float PositionX;
         public float PositionY;
+        public int LoadGame;
         
         public SaveData
         (
@@ -129,7 +132,8 @@ public class GameStatus : MonoBehaviour
          int collectablesRecord,
          string nameScene,
          float PositionX,
-         float PositionY
+         float PositionY,
+         int LoadGame 
         )
         {
             this.collectablesRaw = collectablesRaw;
@@ -138,6 +142,7 @@ public class GameStatus : MonoBehaviour
             this.nameScene = nameScene;
             this.PositionX = PositionX;
             this.PositionY = PositionY;
+            this.LoadGame = LoadGame;
 
         }
         

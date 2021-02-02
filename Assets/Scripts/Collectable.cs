@@ -22,7 +22,7 @@ public class Collectable : MonoBehaviour
         
         if (SceneManager.GetActiveScene().name == "First_level")
         {
-            if (LoadGame._LoadGame.loadPartida)
+            if (GameStatus._GameStatus.LoadGame == 1)
             {
                 cornCollectable = GameStatus._GameStatus.collectablesRaw;
             }

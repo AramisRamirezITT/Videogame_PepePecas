@@ -9,11 +9,7 @@ public class LoadGame : MonoBehaviour
     public SceneChanger changeScene;
     public static LoadGame _LoadGame;
 
-    public bool loadPartida = false;
-    public string level;
-    public float PositionX;
-    public float PositionY;
-    
+    public int loadPartida = 0;
     void Start()
     {
          
@@ -24,10 +20,10 @@ public class LoadGame : MonoBehaviour
     
     public void LoaadGame()
     {
-        loadPartida = true;
+        loadPartida = 1;
+        loadPartida = GameStatus._GameStatus.LoadGame;
+        GameStatus._GameStatus.Save();
         changeScene.ChangeSceneTo(GameStatus._GameStatus.nameScene);
-        
-        
         
         // Debug.Log(GameStatus._GameStatus.tacos);
         // Debug.Log(GameStatus._GameStatus.collectablesRaw);
